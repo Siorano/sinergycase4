@@ -1,0 +1,43 @@
+#include <gtest/gtest.h>
+#include <queue>
+
+// Интерфейс теста для кучи
+class HeapTest : public ::testing::Test {
+protected:
+    std::priority_queue<int> h;
+
+    void SetUp() override {
+        // Инициализация кучи перед каждым тестом
+    }
+
+    void TearDown() override {
+        // Очистка после теста
+    }
+};
+
+// Тест для функции push
+TEST_F(HeapTest, PushTest) {
+    h.push(10);
+    h.push(20);
+    h.push(5);
+    EXPECT_EQ(h.top(), 20);  // Проверяем, что на вершине кучи 20
+}
+
+// Тест для функции pop
+TEST_F(HeapTest, PopTest) {
+    h.push(10);
+    h.push(20);
+    h.push(5);
+    h.pop();
+    EXPECT_EQ(h.top(), 10);  // После pop, на вершине будет 10
+}
+
+// Тест для корректности работы кучи после нескольких операций
+TEST_F(HeapTest, MultiplePushPopTest) {
+    h.push(10);
+    h.push(30);
+    h.push(20);
+    h.pop();
+    h.push(5);
+    EXPECT_EQ(h.top(), 20);  // После попа и вставки 5, на вершине должна быть 20
+}
